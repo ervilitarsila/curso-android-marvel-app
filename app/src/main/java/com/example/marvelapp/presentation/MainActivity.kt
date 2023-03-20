@@ -8,7 +8,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.marvelapp.R
 import com.example.marvelapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.toolbarApp.setupWithNavController(navController, appBarConfiguration)
 
+        // Remover o botão de voltar nos Fragments dos Topos
         navController.addOnDestinationChangedListener {_, destination, _ ->
             val isTopLevelDestination = appBarConfiguration.topLevelDestinations.contains(destination.id)
             if(!isTopLevelDestination){
