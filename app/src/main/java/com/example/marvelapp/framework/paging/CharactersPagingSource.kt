@@ -14,7 +14,7 @@ class CharactersPagingSource(
 ) : PagingSource<Int, Character>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
-        try {
+       return try {
             val offset = params.key ?: 0
 
             val queries = hashMapOf(
