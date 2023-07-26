@@ -14,6 +14,14 @@ def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\ervili.tarsila\\AndroidStudioProjects\\curso-android-marvel-app\\store\\marvel_app_key_store.jks')
+            storePassword 'T@rsila2023'
+            keyAlias 'marvel-app'
+            keyPassword 'T@rsila2023'
+        }
+    }
     compileSdkVersion 33
 
     defaultConfig {
@@ -31,8 +39,21 @@ android {
     }
 
     buildTypes {
+        debug {
+            debuggable = true
+            applicationIdSuffix '.debug'
+        }
+        staging {
+            initWith debug
+            minifyEnabled true
+            applicationIdSuffix '.staging'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro',
+            'proguard-rules-staging.pro'
+        }
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
